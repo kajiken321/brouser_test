@@ -7,10 +7,9 @@ import { Input } from "@/components/ui/input"
 
 export default function Home() {
   const [url, setUrl] = useState('https://example.com')
-  const [content, setContent] = useState<string | null>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
-  const navigate = async (newUrl: string) => {
+  const navigate = (newUrl: string) => {
     const urlWithProtocol = newUrl.startsWith('http') ? newUrl : `https://${newUrl}`
     setUrl(urlWithProtocol)
     if (iframeRef.current) {
@@ -27,7 +26,7 @@ export default function Home() {
     if (iframeRef.current) {
       iframeRef.current.src = url
     }
-  }, [])
+  }, [url])
 
   return (
     <div className="flex flex-col h-screen bg-white">
